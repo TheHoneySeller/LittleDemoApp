@@ -1,0 +1,75 @@
+version: '3'
+
+services:
+  
+  course:
+    image: 'course-controller:latest'
+    networks:
+      - network-1
+      - default
+    build: 
+      context: courseController
+    ports:
+      - 8082:8082
+    container_name: course
+
+  student:
+    image: 'student-contorller:latest'
+    networks:
+      - network-1
+      - default
+    build: 
+      context: studentController
+    ports:
+      - 8080:8080
+    container_name: student
+
+  app:
+    image: 'little-demo-app:latest'
+    networks:
+      - network-1
+      - data 
+    build:
+      context: ./app
+    ports:
+      - 8081:8081
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  
+  
+
+  db:
+    image: 'postgres:latest'
+    networks:
+      - data
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+  
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports: 
+      - 3001:3000
+    volumes:
+      - ./frontend:/app
+      - ./app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
+
+  
+
+networks:
+  network-1:
+  data:

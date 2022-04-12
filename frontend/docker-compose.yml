@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - '.:/app'
-      - '/app/node_modules'
+      - ./node_modules
     ports:
       - 3001:3000
     environment:

@@ -4,23 +4,20 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 
-class MyForm extends Component {
+class StudentForm extends Component {
 
 
-  state = {
-    name: "",
-    surname: "",
-    stype: ""
-  }
+  
 
   submit = (e) => {
     e.preventDefault();
     let newName = document.getElementById("name").value;
     let newSurname = document.getElementById("surname").value;
-    let newStype = document.getElementById("stype").value;
-    let objectToSend = {name: newName, surname: newSurname, stype: newStype};
+    let newStudentLevel = document.getElementById("studentLevel").value;
+    console.log(newStudentLevel)
+    let objectToSend = {name: newName, surname: newSurname, level: newStudentLevel};
 
-    axios.put("http://localhost:8081/newstudent", objectToSend).then( (response) => {
+    axios.post("http://localhost:8080/student", objectToSend).then( (response) => {
       this.props.updateSibling();
     });
 
@@ -41,13 +38,14 @@ class MyForm extends Component {
             <Form.Control type="string"  placeholder="Surname of the student"  required={true} id = "surname"/>
           </Form.Group>
 
-          <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Type</Form.Label>
-            <Form.Control as="select" id = "stype">
-              <option value = "Undergraduate">Undergraduate</option>
-              <option value = "Graduate">Graduate</option>
+          <Form.Group controlId="StudentLevel">
+            <Form.Label>Student Level</Form.Label>
+            <Form.Control as="select" id = "studentLevel">
+              <option value = "UNDERGRADUATE">Undergraduate</option>
+              <option value = "GRADUATE">Graduate</option>
             </Form.Control>
           </Form.Group>
+
           <Button variant="primary" type="Register"  >
             Register
           </Button>
@@ -58,4 +56,4 @@ class MyForm extends Component {
   }
 }
 
-export default MyForm;
+export default StudentForm;

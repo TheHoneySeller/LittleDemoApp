@@ -7,7 +7,7 @@ First build the app, studentController and courseController by running:
 
     mvn clean package -DskipTests
 
-on the app directory and running:
+on the app directory, and running:
 
     mvn clean package
 
@@ -28,7 +28,7 @@ to build and run all the docker images.
 
 Then, cross your fingers and connect to http://localhost:3001/ in your borwser. 
 
-ta daa...
+Ta daa...
 
 
 If you are getting an error about wrong volume specification, try:

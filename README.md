@@ -31,7 +31,7 @@ Then, cross your fingers and connect to http://localhost:3001/ in your borwser.
 ta daa...
 
 
-If you are getting an error about wrong volume spesification, try:
+If you are getting an error about wrong volume specification, try:
 
     docker-compose down -v
 

@@ -4,13 +4,11 @@ WORKDIR /app
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-COPY package.json .
-COPY package-lock.json .
+# Since we are adding node_modules as a volume, no need to run npm install inside the container.
+# COPY package.json .
+# COPY package-lock.json .
 
-RUN npm install
-RUN npm install react-scripts
-RUN npm install axios
-RUN npm install react-bootstrap
+# RUN npm install
 
 COPY . .
 
